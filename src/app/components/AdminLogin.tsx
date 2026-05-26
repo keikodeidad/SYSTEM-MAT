@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { TextField, Button, Card, CardContent, Typography, Box } from '@mui/material';
-import { AdminPanelSettings } from '@mui/icons-material';
+import { AdminPanelSettings, ArrowBack } from '@mui/icons-material';
 import { motion } from 'motion/react';
 
 interface AdminLoginProps {
   onLogin: (username: string, password: string) => void;
+  onBack?: () => void;
 }
 
-export function AdminLogin({ onLogin }: AdminLoginProps) {
+export function AdminLogin({ onLogin, onBack }: AdminLoginProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -18,6 +19,15 @@ export function AdminLogin({ onLogin }: AdminLoginProps) {
 
   return (
     <Box className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-200 flex items-center justify-center p-4">
+      {onBack && (
+        <Button
+          onClick={onBack}
+          startIcon={<ArrowBack />}
+          sx={{ position: 'absolute', top: 20, left: 20, color: '#64748b', textTransform: 'none' }}
+        >
+          Volver
+        </Button>
+      )}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
